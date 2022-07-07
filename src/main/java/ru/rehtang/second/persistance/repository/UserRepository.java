@@ -6,5 +6,5 @@ import ru.rehtang.second.persistance.model.UserModel;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, String> {
-    Boolean existsByUsername(String username);
+  Boolean existsByUsername(String username);
 }

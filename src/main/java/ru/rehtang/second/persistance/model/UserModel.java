@@ -22,15 +22,6 @@ public class UserModel {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "account_non_locked")
-  private boolean accountNonLocked;
-
-  @Column(name = "failed_attempt")
-  private int failedAttempt;
-
-  @Column(name = "lock_time")
-  private Date lockTime;
-
   @ToString.Exclude
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(

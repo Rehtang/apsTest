@@ -45,6 +45,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'io.micrometer:micrometer-core:1.9.0'
+    implementation 'com.google.guava:guava:31.1-jre'
 }
 
 dependencyManagement {

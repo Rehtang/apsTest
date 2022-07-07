@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
+@Transactional
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
 
@@ -27,7 +29,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
   @JsonIgnore
   @Override
   public boolean isAccountNonLocked() {
-    return user.isAccountNonLocked();
+    return true;
   }
 
   @JsonIgnore
