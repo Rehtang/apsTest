@@ -2,8 +2,10 @@ package ru.rehtang.second.persistance.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +29,22 @@ public class UserModel {
           inverseJoinColumns = @JoinColumn(name = "name"))
   private List<AnimalModel> ownedAnimals;
 
+
+  public UserModel addToOwned(AnimalModel animal) {
+    if (ownedAnimals == null) {
+      ownedAnimals = new ArrayList<>();
+    }
+    ownedAnimals.add(animal);
+    return this;
+  }
+
+  public UserModel removeFromOwned(AnimalModel animal) {
+    if (CollectionUtils.isEmpty(ownedAnimals)) {
+      return this;
+    }
+    ownedAnimals.remove(animal);
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
