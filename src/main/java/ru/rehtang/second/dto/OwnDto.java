@@ -10,6 +10,6 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class OwnDto {
-    private String username;
-    private String name;
+  private String username;
+  private String name;
 }

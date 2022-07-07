@@ -11,15 +11,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnimalDto {
-    @JsonProperty
-    private AnimalType type;
+  @JsonProperty private AnimalType type;
 
-    @JsonProperty
-    private LocalDate birthday;
+  @JsonProperty private LocalDate birthday;
 
-    @JsonProperty
-    private Sex sex;
+  @JsonProperty private Sex sex;
 
-    @JsonProperty
-    private String name;
+  @JsonProperty private String name;
 }

@@ -24,11 +24,10 @@ public class UserModel {
   @ToString.Exclude
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(
-          name = "owned_animals",
-          joinColumns = @JoinColumn(name = "username"),
-          inverseJoinColumns = @JoinColumn(name = "name"))
+      name = "owned_animals",
+      joinColumns = @JoinColumn(name = "username"),
+      inverseJoinColumns = @JoinColumn(name = "name"))
   private List<AnimalModel> ownedAnimals;
-
 
   public UserModel addToOwned(AnimalModel animal) {
     if (ownedAnimals == null) {
@@ -62,6 +61,4 @@ public class UserModel {
   public int hashCode() {
     return getClass().hashCode();
   }
-
-
 }
