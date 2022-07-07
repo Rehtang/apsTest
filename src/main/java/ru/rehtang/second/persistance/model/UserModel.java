@@ -5,9 +5,7 @@ import org.hibernate.Hibernate;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -15,11 +13,23 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserModel {
-  @Id @Column private String username;
+  @Id
+  @Column(name = "username")
+  private String username;
 
-  @Column private String password;
+  @Column(name = "password")
+  private String password;
+
+  @Column(name = "account_non_locked")
+  private boolean accountNonLocked;
+
+  @Column(name = "failed_attempt")
+  private int failedAttempt;
+
+  @Column(name = "lock_time")
+  private Date lockTime;
 
   @ToString.Exclude
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -28,6 +38,18 @@ public class UserModel {
       joinColumns = @JoinColumn(name = "username"),
       inverseJoinColumns = @JoinColumn(name = "name"))
   private List<AnimalModel> ownedAnimals;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status", nullable = false, columnDefinition = "ACTIVE")
+  private Status status;
+
+  @ToString.Exclude
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "user_role",
+      joinColumns = @JoinColumn(name = "user_name", referencedColumnName = "username"),
+      inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+  private Set<RoleModel> roles = new HashSet<>();
 
   public UserModel addToOwned(AnimalModel animal) {
     if (ownedAnimals == null) {
@@ -60,5 +82,11 @@ public class UserModel {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+
+  public enum Status {
+    ACTIVE,
+    BANNED,
+    DELETED
   }
 }

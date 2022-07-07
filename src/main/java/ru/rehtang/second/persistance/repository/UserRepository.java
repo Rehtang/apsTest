@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.rehtang.second.persistance.model.UserModel;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserModel, String> {}
+public interface UserRepository extends JpaRepository<UserModel, String> {
+    Boolean existsByUsername(String username);
+}

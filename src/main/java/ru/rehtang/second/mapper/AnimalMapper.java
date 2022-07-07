@@ -1,13 +1,14 @@
 package ru.rehtang.second.mapper;
 
+import io.micrometer.core.instrument.util.StringUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.rehtang.second.dto.AnimalDto;
 import ru.rehtang.second.persistance.model.AnimalModel;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = StringUtils.class)
 public abstract class AnimalMapper {
-
+  @Mapping(target = "users", ignore = true)
   public abstract AnimalModel toModel(AnimalDto dto);
 
   public abstract AnimalDto toDto(AnimalModel model);

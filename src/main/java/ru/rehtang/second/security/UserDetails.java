@@ -1,4 +1,38 @@
 package ru.rehtang.second.security;
 
-public class UserDetails {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
+import java.util.UUID;
+
+@Getter
+@AllArgsConstructor
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+
+
+  private final String username;
+  private final String password;
+  private final boolean isEnabled;
+  private final Collection<? extends GrantedAuthority> authorities;
+
+  @JsonIgnore
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @JsonIgnore
+  @Override
+  public boolean isAccountNonLocked() {
+    return user.isAccountNonLocked();
+  }
+
+  @JsonIgnore
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
 }

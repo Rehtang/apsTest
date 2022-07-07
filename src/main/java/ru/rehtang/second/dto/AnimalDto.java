@@ -5,17 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnimalDto {
-  @JsonProperty private AnimalType type;
+  @JsonProperty private String type;
 
-  @JsonProperty private LocalDate birthday;
+  @JsonProperty private String birthday;
 
-  @JsonProperty private Sex sex;
+  @JsonProperty private String  sex;
 
   @JsonProperty private String name;
 }

@@ -1,32 +1,36 @@
 package ru.rehtang.second.persistance.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
-@Entity
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "animals")
-public class AnimalModel {
-  @Id @Column private String name;
+@RequiredArgsConstructor
+@Entity
+@Table(name = "roles")
+public class RoleModel {
 
-  @Column private String birthday;
+  @Id private UUID id;
 
-  @Column private String sex;
-
-  @Column private String type;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "name", nullable = false)
+  private ERole name;
 
   @JsonBackReference
   @ToString.Exclude
-  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ownedAnimals")
+  @ManyToMany(
+      mappedBy = "roles",
+      cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
   private List<UserModel> users;
 
   @Override
@@ -37,12 +41,17 @@ public class AnimalModel {
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
       return false;
     }
-    AnimalModel animal = (AnimalModel) o;
-    return name != null && Objects.equals(name, animal.name);
+    RoleModel that = (RoleModel) o;
+    return id != null && Objects.equals(id, that.id);
   }
 
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+
+  public enum ERole {
+    ROLE_USER,
+    ROLE_ADMIN
   }
 }
