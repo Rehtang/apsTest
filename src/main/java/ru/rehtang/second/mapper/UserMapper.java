@@ -4,7 +4,6 @@ import io.micrometer.core.instrument.util.StringUtils;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.rehtang.second.dto.UserDto;
@@ -28,8 +27,6 @@ import java.util.UUID;
       UserModel.Status.class
     })
 public abstract class UserMapper {
-
-  public static final UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
   @Autowired protected RoleMapper roleMapper;
 

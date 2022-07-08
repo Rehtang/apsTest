@@ -16,4 +16,4 @@ spring:
 jwt:
   header: Authorization
   secret: ZmlsbQ==
-  expirationMills: 90000   # 15 min
+  expirationMills: 900000   # 15 min

@@ -27,16 +27,21 @@ public class UserService {
     userRepository.save(userMapper.register(userDto));
   }
 
-  public void editUserData(UserDto dto) {
-    UserModel user = findUserByUsername(dto.getUsername());
+  public UserDto editUserData(UserDto dto, String username) {
+    UserModel user = findUserByUsername(username);
     userRepository.save(userMapper.edit(user, dto));
+    return userMapper.toDto(findUserByUsername(dto.getUsername()));
   }
 
-  public Boolean validateUniqueUsername(String username) {
-    return userRepository.existsByUsername(username);
+  public String validateUniqueUsername(String username) {
+    if (userRepository.existsByUsername(username)) {
+      return "Name exists";
+    }
+    return "Name is free";
   }
 
   public void deleteById(String username) {
+
     var entity =
         userRepository
             .findById(username)

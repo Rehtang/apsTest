@@ -22,6 +22,8 @@ public abstract class JwtUserMapper {
   }
 
   @Mapping(target = "authorities", expression = "java(mapToGrantedAuthority(user.getRoles()))")
-  @Mapping(target = "isEnabled", expression = "java(UserModel.Status.ACTIVE.equals(user.getStatus()))")
+  @Mapping(
+      target = "isEnabled",
+      expression = "java(UserModel.Status.ACTIVE.equals(user.getStatus()))")
   public abstract UserDetails toUserDetails(UserModel user);
 }

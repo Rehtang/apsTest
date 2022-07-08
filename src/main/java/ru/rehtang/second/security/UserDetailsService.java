@@ -22,10 +22,6 @@ public class UserDetailsService
 
   @Autowired private HttpServletRequest request;
 
-  /*@Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return jwtUserMapper.toUserDetails(userService.findUserByUsername(username));
-  }*/
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     String ip = getClientIP();

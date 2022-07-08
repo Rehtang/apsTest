@@ -21,44 +21,43 @@ import ru.rehtang.second.security.jwt.JwtTokenFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  public static final String[] AUTH_WHITELIST = {
+    "/auth/login", "/user/register", "/user/check",
+  };
   private final UserDetailsService userDetailsService;
   private final JwtTokenFilter jwtTokenFilter;
   private final PasswordEncoder passwordEncoder;
   private final AuthEntryPointJwt unauthorizedHandler;
 
-  public static final String[] AUTH_WHITELIST = {
-          "/auth/login", "/user/register", "/user/check",
-  };
-
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors()
-            .and()
-            .csrf()
-            .disable()
-            .exceptionHandling()
-            .authenticationEntryPoint(unauthorizedHandler)
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-            .antMatchers(AUTH_WHITELIST)
-            .permitAll()
-            .antMatchers("/user/**")
-            .hasRole("USER")
-            .anyRequest()
-            .authenticated();
+        .and()
+        .csrf()
+        .disable()
+        .exceptionHandling()
+        .authenticationEntryPoint(unauthorizedHandler)
+        .and()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authorizeRequests()
+        .antMatchers(AUTH_WHITELIST)
+        .permitAll()
+        .antMatchers("/user/**")
+        .hasRole("USER")
+        .anyRequest()
+        .authenticated();
 
     http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
   @Override
   public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
-          throws Exception {
+      throws Exception {
     authenticationManagerBuilder
-            .userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder);
+        .userDetailsService(userDetailsService)
+        .passwordEncoder(passwordEncoder);
   }
 
   @Bean

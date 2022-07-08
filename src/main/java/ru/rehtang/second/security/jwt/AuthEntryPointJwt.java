@@ -8,7 +8,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,25 +22,25 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
   @Override
   public void commence(
-          HttpServletRequest request,
-          HttpServletResponse response,
-          AuthenticationException authException)
-          throws IOException, ServletException {
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AuthenticationException authException)
+      throws IOException {
     log.error("Unauthorized error: {}", authException.getMessage());
 
     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
     Map<String, Object> body =
-            Map.of(
-                    "status",
-                    HttpServletResponse.SC_UNAUTHORIZED,
-                    "error",
-                    "Unauthorized",
-                    "message",
-                    authException.getMessage(),
-                    "path",
-                    request.getServletPath());
+        Map.of(
+            "status",
+            HttpServletResponse.SC_UNAUTHORIZED,
+            "error",
+            "Unauthorized",
+            "message",
+            authException.getMessage(),
+            "path",
+            request.getServletPath());
 
     objectMapper.writeValue(response.getOutputStream(), body);
   }

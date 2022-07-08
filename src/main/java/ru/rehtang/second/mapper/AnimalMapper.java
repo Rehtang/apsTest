@@ -9,6 +9,7 @@ import ru.rehtang.second.persistance.model.AnimalModel;
 @Mapper(componentModel = "spring", imports = StringUtils.class)
 public abstract class AnimalMapper {
   @Mapping(target = "users", ignore = true)
+  @Mapping(target = "birthday", expression = "java(dto.getBirthday().toString())")
   public abstract AnimalModel toModel(AnimalDto dto);
 
   public abstract AnimalDto toDto(AnimalModel model);
@@ -20,7 +21,7 @@ public abstract class AnimalMapper {
   @Mapping(
       target = "birthday",
       expression =
-          "java(StringUtils.isNotBlank(dto.getBirthday()) ? dto.getBirthday() : before.getBirthday())")
+          "java(StringUtils.isNotBlank(dto.getBirthday().toString()) ? dto.getBirthday().toString() : before.getBirthday())")
   @Mapping(
       target = "sex",
       expression = "java(StringUtils.isNotBlank(dto.getSex()) ? dto.getSex() : before.getSex())")

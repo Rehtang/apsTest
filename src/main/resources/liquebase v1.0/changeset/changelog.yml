@@ -1,0 +1,17 @@
+databaseChangelog:
+  - changeSet:
+      id: 20220707-01
+      author: daniltc23@gmail.com
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: 20220707-01-init_main_tables.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 20220707-02
+      author: daniltc23@gmail.com
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: 20220707-02-init_additional_tables.sql
+            relativeToChangelogFile: true

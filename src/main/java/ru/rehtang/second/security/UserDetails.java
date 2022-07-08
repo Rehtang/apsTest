@@ -7,13 +7,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
 @Transactional
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
-
 
   private final String username;
   private final String password;

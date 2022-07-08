@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -14,8 +13,8 @@ import java.util.UUID;
 @Accessors(chain = true)
 public class JwtResponse {
 
-    private String token;
-    private String type = "Bearer";
-    private String username;
-    private List<String> roles;
+  private String token;
+  private String type = "Bearer";
+  private String username;
+  private List<String> roles;
 }

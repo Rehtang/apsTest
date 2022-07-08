@@ -24,11 +24,11 @@ public class JwtUtils {
     UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 
     return Jwts.builder()
-            .setSubject((userPrincipal.getUsername()))
-            .setIssuedAt(new Date())
-            .setExpiration(new Date((new Date()).getTime() + expirationMills))
-            .signWith(SignatureAlgorithm.HS512, jwtSecret)
-            .compact();
+        .setSubject((userPrincipal.getUsername()))
+        .setIssuedAt(new Date())
+        .setExpiration(new Date((new Date()).getTime() + expirationMills))
+        .signWith(SignatureAlgorithm.HS512, jwtSecret)
+        .compact();
   }
 
   public String getUserNameFromJwtToken(Jws<Claims> claimsJws) {

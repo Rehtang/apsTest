@@ -46,9 +46,6 @@ public class AuthController {
             .collect(Collectors.toList());
 
     return ResponseEntity.ok(
-        new JwtResponse()
-            .setToken(jwt)
-            .setUsername(userDetails.getUsername())
-            .setRoles(roles));
+        new JwtResponse().setToken(jwt).setUsername(userDetails.getUsername()).setRoles(roles));
   }
 }
