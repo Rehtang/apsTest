@@ -2,7 +2,7 @@ spring:
   main:
     banner-mode: off
   datasource:
-    url: jdbc:postgresql://localhost:5432/userbd?currentSchema=public
+    url: jdbc:postgresql://localhost:5432/apsTest?currentSchema=public
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -12,3 +12,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
+
+jwt:
+  header: Authorization
+  secret: ZmlsbQ==
+  expirationMills: 900000   # 15 min
